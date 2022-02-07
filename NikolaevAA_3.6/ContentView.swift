@@ -24,12 +24,9 @@ struct ContentView: View {
             
             Spacer()
             if showAward {
-                //А здесь впихнуть свою фигуру
-                /*
-                GradientRectangles()
+                CubeView()
                     .frame(width: 250, height: 250)
                     .transition(.leadingSlide)
-                 */
             }
             Spacer()
         }
