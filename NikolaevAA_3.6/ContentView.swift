@@ -23,11 +23,17 @@ struct ContentView: View {
             }
             
             Spacer()
-            if showAward {
-                CubeView()
-                    .frame(width: 250, height: 250)
-                    .transition(.leadingSlide)
-            }
+            CubeView()
+                .frame(width: 250, height: 250)
+                .offset(y: showAward ? 0 : -UIScreen.main.bounds.height)
+                .animation(
+                    .interpolatingSpring(
+                        mass: 1,
+                        stiffness: 100,
+                        damping: 10,
+                        initialVelocity: 0
+                    )
+                )
             Spacer()
         }
         .font(.headline)
@@ -38,17 +44,6 @@ struct ContentView: View {
         withAnimation {
             showAward.toggle()
         }
-    }
-}
-
-extension AnyTransition {
-    //Здесь придумать свою анимацию
-    static var leadingSlide: AnyTransition {
-        let insertion = AnyTransition.move(edge: .leading)
-            .combined(with: .scale)
-        let removal = AnyTransition.scale
-            .combined(with: .opacity)
-        return .asymmetric(insertion: insertion, removal: removal)
     }
 }
 
